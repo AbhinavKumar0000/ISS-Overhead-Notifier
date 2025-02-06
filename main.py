@@ -1,12 +1,15 @@
-import requests
 from datetime import datetime
-import smtplib
-import time
+import requests
+from twilio.rest import Client
 
-MY_LAT = 23.259933 # Your latitude
-MY_LONG = 77.412613 # Your longitude
-MY_EMAIL = " " # Your email
-MY_PASS = " " # Your password
+endpoint = "https://pro.openweathermap.org/data/2.5/forecast"
+api_key = "1b623690d1841bd2d55b902d99eabfbf"
+account_sid = "" #Twilio account SID 
+auth_token = "" #Twilio authentication key
+
+MY_LAT =  # Your latitude For testing purpose
+MY_LONG =  # Your longitude
+
 
 
 def is_iss_overhead():
@@ -17,7 +20,7 @@ def is_iss_overhead():
     iss_latitude = float(data["iss_position"]["latitude"])
     iss_longitude = float(data["iss_position"]["longitude"])
 
-    if  MY_LAT - 5 <= iss_latitude <= MY_LAT + 5 and MY_LONG-5 <= iss_longitude <= MY_LONG+5:
+    if  MY_LAT - 10 <= iss_latitude <= MY_LAT + 10 and MY_LONG- 10 <= iss_longitude <= MY_LONG+ 10:
         return True
 
 def is_night():
@@ -38,17 +41,16 @@ def is_night():
     if time_now >= sunset  or time_now<= sunrise:
         return  True
 
-while True:
-    time.sleep(60)
-    if is_iss_overhead() and is_night():
-        connection = smtplib.SMTP("smtp.gmail.com")
-        connection.starttls()
-        connection.login(MY_EMAIL, MY_PASS)
-        connection.sendmail(
-            from_addr=MY_EMAIL,
-            to_addrs=MY_EMAIL,
-            msg="Subject:Look UP👆\n\nThe ISS is above you in the sky."
-        )
+if is_iss_overhead() and is_night():
+
+    client = Client(account_sid, auth_token)
+    message = client.messages.create(
+        body="Subject:Look UP👆\n\nThe ISS 🛰🌙 is above you in the sky.",
+        from_="+18596970391",
+        to="+918383951265",
+    )
+    print(message.status)
+
 
 
 
