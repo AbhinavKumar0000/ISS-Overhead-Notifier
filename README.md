@@ -1,21 +1,19 @@
 # ISS-Overhead-Notifier
 
-ISS Overhead Notifier
-A Python script that checks if the International Space Station (ISS) is currently passing over a specified location and whether it is nighttime. If both conditions are met, the script sends an email notification to alert the user to look up at the sky.
+ISS Overhead Notifier is a Python-based project that sends an SMS alert when the International Space Station (ISS) is flying overhead and visible in the night sky. The project integrates real-time ISS location tracking, weather APIs, and Twilio for messaging notifications.
 
-Features:
-Uses the open-notify API to track the ISS position.
-Determines local sunrise and sunset times via the sunrise-sunset API.
-Sends email notifications when the ISS is visible overhead at night.
-Runs continuously, checking conditions every 60 seconds.
+This solution is ideal for space enthusiasts who never want to miss the chance to spot the ISS when conditions are perfect.
 
-Technologies Used:
--Python
--requests for API calls
--smtplib for email notifications
--datetime for time handling
+🛠 Features
+🛰 ISS Location Tracking: Monitors the real-time location of the ISS using an open API.
+🌙 Night-Time Check: Ensures notifications are only sent when the sky is dark enough for visibility.
+📲 SMS Notifications: Leverages Twilio API to send alerts directly to the user’s phone.
+☁️ Cloud Deployment Ready: Can run on platforms like PythonAnywhere for continuous monitoring.
+🚀 How It Works
+Track ISS Location: Checks if the ISS is within a defined range of the user's location.
+Night-Time Visibility: Verifies whether it’s dark at the user's coordinates using the sunrise-sunset API.
+Send Alert: If both conditions are met, sends an SMS via Twilio:
+"Look UP! 👆 The ISS 🛰🌙 is above you in the sky."
 
-Setup Instructions:
--Update the script with your latitude and longitude.
--Enter your email credentials for notifications.
--Run the script and receive alerts when the ISS is visible.
+
+
